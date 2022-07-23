@@ -9,7 +9,7 @@ namespace BrnEventos.API.Models
     {
         public int EventoId { get; set; }
 
-        public string LocalId { get; set; }
+        public string Local { get; set; }
 
         public string DataEvento { get; set; }
 
