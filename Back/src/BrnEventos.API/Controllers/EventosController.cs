@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BrnEventos.API.Data;
-using BrnEventos.API.Models;
+using BrnEventos.Persistence;
+using BrnEventos.Domain;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -13,8 +13,8 @@ namespace BrnEventos.API.Controllers
     [Route("api/[controller]")]
     public class EventosController : ControllerBase
     {
-        private readonly DataContext _context;
-        public EventosController(DataContext context)
+        private readonly BrnEventosContext _context;
+        public EventosController(BrnEventosContext context)
         {
             _context = context;
         }
@@ -28,7 +28,8 @@ namespace BrnEventos.API.Controllers
         [HttpGet("{id}")]
         public Evento GetById(int id)
         {
-            return _context.Eventos.FirstOrDefault(evento => evento.EventoId == id);
+            return _context.Eventos.FirstOrDefault(
+                evento => evento.Id == id);
         }
 
         [HttpPost]
