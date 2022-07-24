@@ -1,8 +1,59 @@
-<h1>Eventos do Components</h1>
+<h2>Eventos</h2>
+<hr>
 
-
-<div *ngFor="let evento of eventos">
-  <p><b>Tema:</b> {{evento.tema}}</p>
-  <p><b>Local:</b> {{evento.local}}</p>
-  <hr>
+<div class="row row-cols-lg-auto g-3 align-items-center mb-4">
+  <div>
+    <label class="visually-hidden" for="inlineFormInputGroupUsername"></label>
+    <div class="input-group">
+      <label class="mr-2"></label>
+      <input type="text" class="form-control" placeholder="buscar" [(ngModel)]="filtroLista" />
+    </div>
+  </div>
 </div>
+<!-- <h4>Filtro: {{filtroLista}}</h4> -->
+<table class="table table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>
+        <button class="btn btn-outline-light btn-sm border-2" (click)="alterarImagem()">
+          {{!showimg ? "Exibir" : "Ocultar"}}
+        </button>
+      </th>
+      <th>#</th>
+      <th>Tema</th>
+      <th>Local</th>
+      <th>Data</th>
+      <th>Qtd Pessoas</th>
+      <th>Lote</th>
+      <th>Opções</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="eventos && eventos.length">
+    <tr *ngFor="let evento of eventosFiltrados">
+      <td>
+        <img [collapse]="!showimg" [isAnimated]="true" src="../../assets/img/evento/{{evento.imagemURL}}"
+          alt="Imagens do Evento" [style.width.px]="widthImg" [style.height.px]="heightimg"
+          [style.margin.px]="marginImg" />
+      </td>
+      <td>{{evento.eventoId}}</td>
+      <td>{{evento.tema}}</td>
+      <td>{{evento.local}}</td>
+      <td>{{evento.dataEvento}}</td>
+      <td>{{evento.qtdPessoas}}</td>
+      <td>{{evento.lote}}</td>
+      <td>
+        <button class="btn btn-primary btn-sm">Editar</button>
+        <button class="btn btn-danger btn-sm m-lg-2">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot *ngIf="!eventos.length">
+    <tr>
+      <td colspan="8" class="text-center">
+        <h3>Nenhum Evento Encontrado!</h3>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+<!--{{eventos | json}}  retorna um json do DB eventos-->
