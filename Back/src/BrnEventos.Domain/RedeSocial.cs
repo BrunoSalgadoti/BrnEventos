@@ -13,6 +13,6 @@ namespace BrnEventos.Domain
         public int? EventoId { get; set; }
         public Evento Evento { get; set; }
         public int? PalestranteId { get; set; }
-        private Palestrante palestrante { get; set; }
+        public Palestrante palestrante { get; set; }
     }
 }
