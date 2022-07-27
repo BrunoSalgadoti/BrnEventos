@@ -5,17 +5,18 @@
   <div>
     <label class="visually-hidden" for="inlineFormInputGroupUsername"></label>
     <div class="input-group">
-      <label class="mr-2"></label>
+      <label class="me-2 mt-auto"><h5>Filtro:</h5> </label>
       <input type="text" class="form-control" placeholder="buscar" [(ngModel)]="filtroLista" />
     </div>
   </div>
 </div>
-<!-- <h4>Filtro: {{filtroLista}}</h4> -->
 <table class="table table-striped">
   <thead class="table-dark">
     <tr>
       <th>
-        <button class="btn btn-outline-light btn-sm border-2" (click)="alterarImagem()">
+        <button class="btn btn-outline-light btn-sm border-2"
+        (click)="alterarImagem()">
+        <i class="{{!showimg ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i>
           {{!showimg ? "Exibir" : "Ocultar"}}
         </button>
       </th>
@@ -35,15 +36,19 @@
           alt="Imagens do Evento" [style.width.px]="widthImg" [style.height.px]="heightimg"
           [style.margin.px]="marginImg" />
       </td>
-      <td>{{evento.eventoId}}</td>
+      <td>{{evento.id}}</td>
       <td>{{evento.tema}}</td>
       <td>{{evento.local}}</td>
-      <td>{{evento.dataEvento}}</td>
+      <td>{{evento.dataEvento | DateTimeFormatPipe }}</td>
       <td>{{evento.qtdPessoas}}</td>
-      <td>{{evento.lote}}</td>
+      <td>{{evento.lotes[0].nome | uppercase }}</td>
       <td>
-        <button class="btn btn-primary btn-sm">Editar</button>
-        <button class="btn btn-danger btn-sm m-lg-2">Excluir</button>
+          <button type="button" data-toggle="tooltip" title="Editar" class="btn btn-primary btn-sm me-2" >
+            <i class="fa fa-edit"></i>
+          </button>
+          <button type="button"  data-toggle="tooltip" title="Excluir"  class="btn btn-danger btn-sm">
+            <i class="fa fa-trash"></i>
+          </button>
       </td>
     </tr>
   </tbody>
@@ -56,4 +61,4 @@
   </tfoot>
 </table>
 
-<!--{{eventos | json}}  retorna um json do DB eventos-->
+<!-- {{eventos | json}} -->
