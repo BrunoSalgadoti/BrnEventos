@@ -13,7 +13,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^13.0.0",
+    "@angular/animations": "^13.3.11",
     "@angular/cli": "^13.0.0",
     "@angular/common": "^13.0.0",
     "@angular/compiler": "^13.0.0",
@@ -25,6 +25,8 @@
     "@fortawesome/fontawesome-free": "^6.1.1",
     "bootstrap": "^5.2.0",
     "ngx-bootstrap": "^8.0.0",
+    "ngx-spinner": "^13.1.1",
+    "ngx-toastr": "^13.2.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -34,13 +36,13 @@
     "@angular/compiler-cli": "^13.3.11",
     "@cypress/schematic": "^2.0.0",
     "@types/jasmine": "~4.0.0",
+    "cypress": "latest",
     "jasmine-core": "~4.1.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.4.2",
-    "cypress": "latest"
+    "typescript": "~4.4.2"
   }
 }

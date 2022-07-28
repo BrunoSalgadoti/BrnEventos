@@ -1,32 +1,32 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
   <div class="container-fluid mx-lg-5">
     <img src="../../assets/img/logo.png" alt="BRN-Produções" width="60" height="60">
-    <a class="navbar-brand" href="#">BRN-Eventos</a>
+    <a class="navbar-brand" routerLink="dashboard">BRN-Eventos</a>
     <button class="navbar-toggler" (click)="isCollapsed = !isCollapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" [collapse]="isCollapsed" [isAnimated]="true" id="navbarNav">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Eventos</a>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" aria-current="page" routerLink="evento" style="font-weight: bold ;">Eventos</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Palestrantes</a>
+        <li class="nav-item"  routerLinkActive="active">
+          <a class="nav-link" routerLink="palestrante" style="font-weight: bold ;">Palestrantes</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contatos</a>
+        <li class="nav-item"  routerLinkActive="active">
+          <a class="nav-link" routerLink="contato" style="font-weight: bold ;">Contatos</a>
         </li>
       </ul>
 
       <ul class="navbar-nav">
         <li class="nav-item dropdown" dropdown container="body">
-          <a dropdownToggle class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          <a dropdownToggle class="nav-link dropdown-toggle" style="cursor: pointer;" id="navbarDropdownMenuLink" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             Usuário
           </a>
           <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" container="body">
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item" routerLink="perfil">
               Perfil
             </a>
             <div role="separator" class="divider"></div>

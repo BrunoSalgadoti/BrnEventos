@@ -1,6 +1,4 @@
-<h2>Eventos</h2>
-<hr>
-
+<app-titulo  [titulo]="'Eventos'"></app-titulo>
 <div class="row row-cols-lg-auto g-3 align-items-center mb-4">
   <div>
     <label class="visually-hidden" for="inlineFormInputGroupUsername"></label>
@@ -46,7 +44,7 @@
           <button type="button" data-toggle="tooltip" title="Editar" class="btn btn-primary btn-sm me-2" >
             <i class="fa fa-edit"></i>
           </button>
-          <button type="button"  data-toggle="tooltip" title="Excluir"  class="btn btn-danger btn-sm">
+          <button type="button"  data-toggle="tooltip" title="Excluir"  class="btn btn-danger btn-sm" (click)="openModal(template)">
             <i class="fa fa-trash"></i>
           </button>
       </td>
@@ -62,3 +60,11 @@
 </table>
 
 <!-- {{eventos | json}} -->
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <h4>Tem certeza que deseja deletar este Evento?</h4>
+    <button type="button" class="btn btn-default me-2" (click)="confirm()" >Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+  </div>
+</ng-template>
