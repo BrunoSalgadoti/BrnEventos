@@ -3,8 +3,10 @@
   <div class="d-flex">
     <div class="flex-fill">
       <div class="input-group mb-2">
-        <div class="input-group-prepend">
-          <div class="input-group-text">Filtro:</div>
+        <div class="d-flex input-group-prepend">
+          <div class="input-group-text">
+            <i class="fa fa-search my-1"></i>
+          </div>
         </div>
         <input type="text" class="form-control me-2" placeholder="Buscar por Tema ou Local" [(ngModel)]="filtroLista" />
       </div>

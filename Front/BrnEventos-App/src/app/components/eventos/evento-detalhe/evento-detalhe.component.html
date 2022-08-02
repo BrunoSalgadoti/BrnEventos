@@ -1,44 +1,97 @@
 <div class="card rouded shadow-sm bg-transparent">
-  <form>
+  <form [formGroup]="form">
+    <!-- Verificação simples de valores e validação do retorno em Json de um Formulário exibido na tela -->
+    <!--
+    <p>Form value: {{form.value | json}} </p>
+    <p>Form valid: {{form.status | json}} </p>
+    -->
     <div class="p-3">
       <div class="row">
         <div class="form-group col-md-12">
           <label class="my-2">Tema</label>
-          <input type="text" class="form-control mb-2" placeholder="Insira o Tema">
+          <input type="text" class="form-control mb-2" [ngClass]="{'is-invalid': f.tema.errors && f.tema.touched}"
+            formControlName="tema" placeholder="Tema do Evento">
+          <div *ngIf="f.tema.errors?.required" class="invalid-feedback">
+            * Campo obrigatório!
+          </div>
+          <div *ngIf="f.tema.errors?.minlength" class="invalid-feedback">
+            * Tema deve conter no mínimo 4 caracteres.
+          </div>
+          <div *ngIf="f.tema.errors?.maxlength" class="invalid-feedback">
+            * Tema deve conter no máximo 55 caracteres.
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-8">
           <label class="my-2">Local</label>
-          <input type="text" class="form-control mb-2" placeholder="">
+          <input type="text" class="form-control mb-2" [ngClass]="{'is-invalid': f.local.errors && f.local.touched}"
+            formControlName="local" placeholder="Local do Evento">
+          <div *ngIf="f.local.errors?.required" class="invalid-feedback">
+            Campo obrigatório!
+          </div>
         </div>
         <div class="form-group col-md-4">
           <label class="my-2">Data e Hora</label>
-          <input type="datetime" class="form-control mb-2" placeholder="">
+          <input type="datetime" class="form-control mb-2" [ngClass]="{'is-invalid': f.dataEvento.errors && f.dataEvento.touched}"
+          formControlName="dataEvento" placeholder="Data e Hora do Evento">
+          <div *ngIf="f.dataEvento.errors?.required" class="invalid-feedback">
+            Campo obrigatório!
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="form-group col-md-2">
           <label class="my-2">Qtd Pessoas</label>
-          <input type="text" class="form-control mb-2" placeholder="">
+          <input type="number" class="form-control mb-2" [ngClass]="{'is-invalid': f.qtdPessoas.errors && f.qtdPessoas.touched}"
+          formControlName="qtdPessoas" placeholder="Qtd. pessoas">
+          <div *ngIf="f.qtdPessoas.errors?.required" class="invalid-feedback">
+            Campo obrigatório!
+          </div>
+          <div *ngIf="f.qtdPessoas.errors?.max" class="invalid-feedback">
+            Evento deve conter no máximo 120.000 participantes!
+          </div>
+          <div *ngIf="f.qtdPessoas.errors?.min" class="invalid-feedback">
+            Evento deve conter no mínimo 1 participante!
+          </div>
+        </div>
+        <div class="form-group col-md-2">
+          <label class="my-2">Telefone</label>
+          <input type="number" class="form-control mb-2" [ngClass]="{'is-invalid': f.telefone.errors && f.telefone.touched}"
+          formControlName="telefone"
+            placeholder="(00) 9 0000-0000">
+          <div *ngIf="f.telefone.errors?.required" class="invalid-feedback">
+            Campo obrigatório!
+          </div>
         </div>
         <div class="form-group col-md-4">
-          <label class="my-2">Telefone</label>
-          <input type="text" class="form-control mb-2" placeholder="(000) 90000-0000">
+          <label class="my-2">E-mail</label>
+          <input type="text" class="form-control mb-2" [ngClass]="{'is-invalid': f.email.errors && f.email.touched}"
+          formControlName="email" placeholder="E-mail">
+          <div *ngIf="f.email.errors?.required" class="invalid-feedback">
+            Campo obrigatório!
+          </div>
+          <div *ngIf="f.email.errors?.email" class="invalid-feedback">
+            E-mail Inválido! Insira um E-mail Válido!
+          </div>
         </div>
-        <div class="form-group col-md-6">
-          <label class="my-2">Email</label>
-          <input type="text" class="form-control mb-2" placeholder="e-mail">
+        <div class="form-group col-md-4">
+          <label class="my-2">Imagem</label>
+          <input type="text" class="form-control mb-2" [ngClass]="{'is-invalid': f.imagemURL.errors && f.imagemURL.touched}"
+          formControlName="imagemURL" placeholder="Imagem do Evento">
+          <div *ngIf="f.imagemURL.errors?.required" class="invalid-feedback">
+            Campo obrigatório!
+          </div>
         </div>
       </div>
     </div>
     <div class="card-footer">
       <div class="d-flex">
-        <button class="btn btn-outline-secondary me-auto border-2">
+        <button class="btn btn-outline-secondary me-auto border-2" (click)="resetForm()">
           Cancelar Alteração
         </button>
-        <button class="btn btn-success">
-        <!-- <span class="spinner-border spinner-border-sm me-1"></span> -->
+        <button class="btn btn-success" [disabled]="!form.valid">
+          <!-- <span class="spinner-border spinner-border-sm me-1"></span> -->
           Salvar Evento
         </button>
       </div>
