@@ -173,10 +173,10 @@
     </div>
     <div class="card-footer border-top">
       <div class="d-flex my-1">
-        <button class="btn btn-outline-secondary me-auto border-2" (click)="resetForm()">
+        <button class="btn btn-outline-secondary me-auto border-2" (click)="resetForm($event)">
           Cancelar Alteração
         </button>
-        <button class="btn btn-success" [disabled]="!form.valid">
+        <button class="btn btn-success">
           <!-- <span class="spinner-border spinner-border-sm me-1"></span> -->
           Salvar Alteração
         </button>
