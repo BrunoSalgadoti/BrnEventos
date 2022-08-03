@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace BrnEventos.API
 {
@@ -33,6 +34,8 @@ namespace BrnEventos.API
                     .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
                         Newtonsoft.Json.ReferenceLoopHandling.Ignore 
                     );
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());            
 
             services.AddScoped<IEventoService, EventoService>();
             services.AddScoped<IGeralPersist, GeralPersist>();
