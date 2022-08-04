@@ -110,9 +110,9 @@ namespace BrnEventos.API.Controllers
                 var evento = await _eventoService.GetEventoByIdAsync(id, true);
                 if (evento == null) return NoContent();
 
-                return await _eventoService.DeleteEvento(id) ? 
-                       Ok("Deletado") : 
-                       throw new Exception("Ocorreu um erro não específico ao tentar deletar o Evento");
+                return await _eventoService.DeleteEvento(id) 
+                      ? Ok(new { menssage = "Deletado"}) 
+                      : throw new Exception("Ocorreu um erro não específico ao tentar deletar o Evento");
             }
             catch (Exception ex)
             {

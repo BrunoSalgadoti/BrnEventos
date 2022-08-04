@@ -52,7 +52,7 @@
         <td class="d-none d-md-table-cell">{{evento.lotes[0]?.nome | uppercase }}</td>
         <td>
           <button type="button" data-toggle="tooltip" title="Excluir" class="btn btn-danger btn-lg"
-            (click)="openModal(template)">
+            (click)="openModal($event, template, evento.id)">
             <i class="fa fa-trash"></i>
           </button>
         </td>
@@ -73,7 +73,7 @@
 
 <ng-template #template>
   <div class="modal-body text-center">
-    <h4>Tem certeza que deseja deletar este Evento?</h4>
+    <h4>Tem certeza que deseja deletar o Evento de Código {{this.eventoId}}?</h4>
     <button type="button" class="btn btn-default me-2" (click)="confirm()">Sim</button>
     <button type="button" class="btn btn-primary" (click)="decline()">Não</button>
   </div>
