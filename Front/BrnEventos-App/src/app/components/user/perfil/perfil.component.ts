@@ -34,10 +34,14 @@ export class PerfilComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       telefone: ['', Validators.required],
       funcao: ['', Validators.required],
-      descricao: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      descricao: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(120)]],
       senha: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(30)]],
       confirmarSenha: ['', Validators.required]
     }, formOptions);
+  }
+
+  public cssValidator(campoForm:  FormControl): any {
+    return {'is-invalid': campoForm.errors && campoForm.touched};
   }
 
   onSubmit(): void {

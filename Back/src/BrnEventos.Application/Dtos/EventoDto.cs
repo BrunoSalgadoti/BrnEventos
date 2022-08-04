@@ -10,7 +10,7 @@ namespace BrnEventos.Application.Dtos
         [Required(ErrorMessage = "O Campo {0} é obrigatório!")]
         public string Local { get; set; }
 
-        [Required(ErrorMessage = "O Campo {0} é obrigatório!")]
+        [Required(ErrorMessage = "O Campo {0} é obrigatório!"),]
         public string DataEvento { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é obrigatório!"),

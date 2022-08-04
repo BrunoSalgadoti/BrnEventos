@@ -9,7 +9,7 @@
       <div class="row">
         <div class="form-group col-md-12">
           <label class="my-2">Tema</label>
-          <input type="text" class="form-control mb-2" [ngClass]="{'is-invalid': f.tema.errors && f.tema.touched}"
+          <input type="text" class="form-control mb-2" [ngClass]="cssValidator(f.tema)"
             formControlName="tema" placeholder="Tema do Evento">
           <div *ngIf="f.tema.errors?.required" class="invalid-feedback">
             * Campo obrigatório!
@@ -25,16 +25,24 @@
       <div class="row">
         <div class="form-group col-md-8">
           <label class="my-2">Local</label>
-          <input type="text" class="form-control mb-2" [ngClass]="{'is-invalid': f.local.errors && f.local.touched}"
+          <input type="text" class="form-control mb-2" [ngClass]="cssValidator(f.local)"
             formControlName="local" placeholder="Local do Evento">
           <div *ngIf="f.local.errors?.required" class="invalid-feedback">
             Campo obrigatório!
           </div>
+          <div *ngIf="f.local.errors?.minlength" class="invalid-feedback">
+            * Tema deve conter no mínimo 3 caracteres.
+          </div>
+          <div *ngIf="f.local.errors?.maxlength" class="invalid-feedback">
+            * Tema deve conter no máximo 100 caracteres.
+          </div>
         </div>
         <div class="form-group col-md-4">
           <label class="my-2">Data e Hora</label>
-          <input type="datetime" class="form-control mb-2" [ngClass]="{'is-invalid': f.dataEvento.errors && f.dataEvento.touched}"
-          formControlName="dataEvento" placeholder="Data e Hora do Evento">
+          <input type="datetime" class="form-control mb-2" [ngClass]="cssValidator(f.dataEvento)"
+          formControlName="dataEvento" placeholder="Data e Hora do Evento"
+          bsDatepicker [bsConfig]="bsConfig"
+          value="{{evento.dataEvento | DateTimeFormatPipe}}">
           <div *ngIf="f.dataEvento.errors?.required" class="invalid-feedback">
             Campo obrigatório!
           </div>
@@ -43,7 +51,7 @@
       <div class="row">
         <div class="form-group col-md-2">
           <label class="my-2">Qtd Pessoas</label>
-          <input type="number" class="form-control mb-2" [ngClass]="{'is-invalid': f.qtdPessoas.errors && f.qtdPessoas.touched}"
+          <input type="number" class="form-control mb-2" [ngClass]="cssValidator(f.qtdPessoas)"
           formControlName="qtdPessoas" placeholder="Qtd. pessoas">
           <div *ngIf="f.qtdPessoas.errors?.required" class="invalid-feedback">
             Campo obrigatório!
@@ -57,7 +65,7 @@
         </div>
         <div class="form-group col-md-2">
           <label class="my-2">Telefone</label>
-          <input type="number" class="form-control mb-2" [ngClass]="{'is-invalid': f.telefone.errors && f.telefone.touched}"
+          <input type="text" class="form-control mb-2" [ngClass]="cssValidator(f.telefone)"
           formControlName="telefone"
             placeholder="(00) 9 0000-0000">
           <div *ngIf="f.telefone.errors?.required" class="invalid-feedback">
@@ -66,7 +74,7 @@
         </div>
         <div class="form-group col-md-4">
           <label class="my-2">E-mail</label>
-          <input type="text" class="form-control mb-2" [ngClass]="{'is-invalid': f.email.errors && f.email.touched}"
+          <input type="text" class="form-control mb-2" [ngClass]="cssValidator(f.email)"
           formControlName="email" placeholder="E-mail">
           <div *ngIf="f.email.errors?.required" class="invalid-feedback">
             Campo obrigatório!
@@ -77,7 +85,7 @@
         </div>
         <div class="form-group col-md-4">
           <label class="my-2">Imagem</label>
-          <input type="text" class="form-control mb-2" [ngClass]="{'is-invalid': f.imagemURL.errors && f.imagemURL.touched}"
+          <input type="text" class="form-control mb-2" [ngClass]="cssValidator(f.imagemURL)"
           formControlName="imagemURL" placeholder="Imagem do Evento">
           <div *ngIf="f.imagemURL.errors?.required" class="invalid-feedback">
             Campo obrigatório!

@@ -2,7 +2,7 @@ using AutoMapper;
 using BrnEventos.Domain;
 using BrnEventos.Application.Dtos;
 
-namespace BrnEventos.API.Helpers
+namespace BrnEventos.Application.Helpers
 {
     public class BrnEventosProfile : Profile
     {
