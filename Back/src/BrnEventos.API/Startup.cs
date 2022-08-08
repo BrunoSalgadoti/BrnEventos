@@ -32,14 +32,17 @@ namespace BrnEventos.API
             );
             services.AddControllers()
                     .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling =
-                        Newtonsoft.Json.ReferenceLoopHandling.Ignore 
+                        Newtonsoft.Json.ReferenceLoopHandling.Ignore
                     );
 
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());            
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddScoped<IEventoService, EventoService>();
+            services.AddScoped<ILoteService, LoteService>();
+
             services.AddScoped<IGeralPersist, GeralPersist>();
             services.AddScoped<IEventoPersist, EventoPersist>();
+            services.AddScoped<ILotePersist, LotePersist>();
 
             services.AddCors();
             services
@@ -47,7 +50,8 @@ namespace BrnEventos.API
                 {
                     c
                         .SwaggerDoc("v1",
-                        new OpenApiInfo {
+                        new OpenApiInfo
+                        {
                             Title = "BrnEventos.API",
                             Version = "v1"
                         });

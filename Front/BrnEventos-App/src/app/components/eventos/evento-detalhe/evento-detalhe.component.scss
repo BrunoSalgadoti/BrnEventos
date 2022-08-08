@@ -1,0 +1,52 @@
+style {
+  text-decoration:"text/css";
+  margin-bottom: 5px;
+}
+
+.iconesSociais {
+  color: rgb(94, 94, 94);
+}
+
+.capitalize {
+  text-transform: capitalize;
+  border-bottom: 1px solid #dee2e6;
+  color: silver;
+}
+
+.tab-pane {
+  padding: 20px 8px 8px;
+  border-top: 0px;
+  border-right: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  border-left: 1px solid #dee2e6;
+}
+
+.card-evento {
+  position: sticky;
+  --default-height: 25px;
+  top: var(--default-height);
+}
+i {
+   margin-right: 5px;
+   margin-left: 0px;
+}
+.card {
+  background-color: transparent;
+  margin-bottom: 2px;
+}
+.btn-outline-secondary{
+ box-sizing: 2;
+ margin-left: 0;
+}
+.btn-success{
+  margin-left: auto;
+}
+.form-control{
+  margin-top: 1vw;
+}
+.label {
+  font-style: normal;
+  font-weight: bold;
+  margin-top: 1vw;
+}
+

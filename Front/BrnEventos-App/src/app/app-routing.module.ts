@@ -26,20 +26,20 @@ const routes: Routes = [
   {
     path: 'user/perfil', component: PerfilComponent
   },
-  { path: 'eventos', redirectTo: 'eventos/lista'},
+  { path: 'eventos', redirectTo: 'eventos/lista' },
   {
     path: 'eventos', component: EventosComponent,
     children: [
-      { path: 'detalhe/:id', component: EventoDetalheComponent},
-      { path: 'detalhe', component: EventoDetalheComponent},
-      { path: 'lista', component: EventoListaComponent},
+      { path: 'detalhe/:id', component: EventoDetalheComponent },
+      { path: 'detalhe', component: EventoDetalheComponent },
+      { path: 'lista', component: EventoListaComponent },
     ]
   },
-  {path: 'contatos', component: ContatosComponent},
-  {path: 'dashboard', component: DashboardComponent},
-  {path: 'palestrantes', component: PalestrantesComponent},
-  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-  {path: '**', redirectTo: 'dashboard', pathMatch: 'full'},
+  { path: 'contatos', component: ContatosComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'palestrantes', component: PalestrantesComponent },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
 
 @NgModule({

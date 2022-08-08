@@ -37,7 +37,7 @@ export class RegistroComponent implements OnInit {
     }, formOptions);
   }
 
-  public cssValidator(campoForm:  FormControl): any {
-    return {'is-invalid': campoForm.errors && campoForm.touched};
+  public cssValidator(campoForm: FormControl): any {
+    return { 'is-invalid': campoForm.errors && campoForm.touched };
   }
 }

@@ -15,6 +15,7 @@ import { ptBrLocale } from 'ngx-bootstrap/locale';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxCurrencyModule } from 'ngx-currency';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +30,7 @@ import { EventoDetalheComponent } from './components/eventos/evento-detalhe/even
 import { EventoListaComponent } from './components/eventos/evento-lista/evento-lista.component';
 
 import { EventoService } from './services/evento.service';
+import { LoteService } from './services/lote.service';
 
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 import { UserComponent } from './components/user/user.component';
@@ -61,6 +63,7 @@ defineLocale('pt-br', ptBrLocale);
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    NgxCurrencyModule,
     CollapseModule.forRoot(),
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
@@ -75,7 +78,8 @@ defineLocale('pt-br', ptBrLocale);
     NgxSpinnerModule
   ],
   providers: [
-    EventoService  //<--- implementa o service em todos as declarations de components
+    EventoService,    //<--- implementa o service em todos as declarations de components
+    LoteService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]

@@ -15,10 +15,9 @@
       </div>
       <div class="row">
         <div class="form-group col-sm-6">
-          <label class="mb-lg-2">Primeiro Nome</label>
+          <label class="label">Primeiro Nome</label>
           <input type="text" class="form-control" formControlName="primeiroNome"
-            [ngClass]="cssValidator(f.primeiroNome)"
-            placeholder="Insira o Primeiro nome" />
+            [ngClass]="cssValidator(f.primeiroNome)" placeholder="Insira o Primeiro nome" />
           <div *ngIf="f.primeiroNome.errors?.required" class="invalid-feedback">
             Campo obrigatório!
           </div>
@@ -29,10 +28,9 @@
             O Primeiro nome deve conter no máximo 20 caracteres.
           </div>
         </div>
-        <div class="form-group mb-lg-3 col-sm-6">
-          <label class="mb-lg-2">Último nome</label>
-          <input type="text" class="form-control" formControlName="ultimoNome"
-            [ngClass]="cssValidator(f.ultimoNome)"
+        <div class="form-group col-sm-6">
+          <label class="label">Último nome</label>
+          <input type="text" class="form-control" formControlName="ultimoNome" [ngClass]="cssValidator(f.ultimoNome)"
             placeholder="Insira o Último nome" />
           <div *ngIf="f.ultimoNome.errors?.required" class="invalid-feedback">
             Campo obrigatório!
@@ -45,10 +43,9 @@
           </div>
         </div>
       </div>
-      <div class="form-group mb-lg-3">
-        <label for="" class="mb-lg-2">Email:</label>
-        <input type="text" class="form-control" formControlName="email"
-          [ngClass]="cssValidator(f.email)"
+      <div class="form-group">
+        <label for="" class="label">Email:</label>
+        <input type="text" class="form-control" formControlName="email" [ngClass]="cssValidator(f.email)"
           placeholder="Insira o seu e-mail" />
         <div *ngIf="f.email.errors?.required" class="invalid-feedback">
           Campo obrigatório!
@@ -57,10 +54,9 @@
           E-mail Inválido! Insira um E-mail Válido!
         </div>
       </div>
-      <div class="form-group  mb-lg-3">
-        <label for="" class="mb-lg-2">Usuario:</label>
-        <input type="text" class="form-control" formControlName="usuario"
-          [ngClass]="cssValidator(f.usuario)"
+      <div class="form-group">
+        <label for="" class="label">Usuario:</label>
+        <input type="text" class="form-control" formControlName="usuario" [ngClass]="cssValidator(f.usuario)"
           placeholder="Insira o nome de Usuário" />
         <div *ngIf="f.usuario.errors?.required" class="invalid-feedback">
           Campo obrigatório!
@@ -74,9 +70,8 @@
       </div>
       <div class="row  mb-lg-3">
         <div class="form-group col-sm-6">
-          <label for="" class="mb-lg-2">Senha:</label>
-          <input type="password" class="form-control" formControlName="senha"
-            [ngClass]="cssValidator(f.senha)"
+          <label for="" class=" label">Senha:</label>
+          <input type="password" class="form-control" formControlName="senha" [ngClass]="cssValidator(f.senha)"
             placeholder="Digite uma Senha" />
           <div *ngIf="f.senha.errors?.required" class="invalid-feedback">
             Campo obrigatório!
@@ -85,14 +80,13 @@
             A senha deve conter no mínimo 6 caracteres.
           </div>
           <div *ngIf="f.senha.errors?.maxlength" class="invalid-feedback">
-             A senha deve conter deve conter no máximo 30 caracteres.
+            A senha deve conter deve conter no máximo 30 caracteres.
           </div>
         </div>
         <div class="form-group col-sm-6">
-          <label for="" class="mb-lg-2">Confirmar Senha:</label>
+          <label for="" class="label">Confirmar Senha:</label>
           <input type="password" class="form-control" formControlName="confirmarSenha"
-            [ngClass]="cssValidator(f.confirmarSenha)"
-            placeholder="Confirme a Senha" />
+            [ngClass]="cssValidator(f.confirmarSenha)" placeholder="Confirme a Senha" />
           <div *ngIf="f.confirmarSenha.errors?.required" class="invalid-feedback">
             Campo obrigatório!
           </div>
@@ -104,7 +98,7 @@
       <div class="row mb-lg-3">
         <div class="custom-control custom-checkbox">
           <input type="checkbox" class="custom-control-input" id="customCheck1 ">
-          <label class="custom-control-label mr-3">Eu concordo com os <a href="#">Termos de Uso</a>.</label>
+          <label class="custom-control-label">Eu concordo com os <a href="#">Termos de Uso</a>.</label>
         </div>
       </div>
       <div class="row">

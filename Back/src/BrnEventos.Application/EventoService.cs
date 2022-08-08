@@ -83,7 +83,7 @@ namespace BrnEventos.Application
                 if (evento == null)
                     throw new Exception("Evento não encontrado!");
 
-                _geralPersist.Delete<Evento> (evento);
+                _geralPersist.Delete<Evento>(evento);
                 return await _geralPersist.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -101,8 +101,8 @@ namespace BrnEventos.Application
 
                 var eventosRetorno = new List<EventoDto>();
 
-                var resultado = _mapper.Map<EventoDto[]>(eventos);      
-               
+                var resultado = _mapper.Map<EventoDto[]>(eventos);
+
                 return resultado;
             }
             catch (Exception ex)
@@ -118,8 +118,8 @@ namespace BrnEventos.Application
                 var eventos = await _eventoPersist.GetAllEventosByTemaAsync(tema, includePalestrantes);
                 if (eventos == null) return null;
 
-                 var resultado = _mapper.Map<EventoDto[]>(eventos);      
-               
+                var resultado = _mapper.Map<EventoDto[]>(eventos);
+
                 return resultado;
             }
             catch (Exception ex)
@@ -135,8 +135,8 @@ namespace BrnEventos.Application
                 var evento = await _eventoPersist.GetEventoByIdAsync(eventoId, includePalestrantes);
                 if (evento == null) return null;
 
-                var resultado = _mapper.Map<EventoDto>(evento);      
-               
+                var resultado = _mapper.Map<EventoDto>(evento);
+
                 return resultado;
             }
             catch (Exception ex)

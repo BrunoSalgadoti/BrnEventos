@@ -1,4 +1,4 @@
-<app-titulo  [titulo]="'Perfil'"></app-titulo>
+<app-titulo [titulo]="'Perfil'"></app-titulo>
 
 <div class="card rouded shadow-sm bg-transparent">
   <form [formGroup]="form">
@@ -10,8 +10,8 @@
           <div class="d-flex align-self-center pt-5">
             <a>
               <img
-              src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R"
-              name="aboutme" width="120" height="120" class="rounded-circle">
+                src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R"
+                name="aboutme" width="120" height="120" class="rounded-circle">
             </a>
           </div>
           <div class="card-body">
@@ -46,10 +46,9 @@
             <h3 class="border-bottom">Detalhe Perfil</h3>
           </div>
           <div class="form-group col">
-            <label class="my-2">Título</label>
-            <select class="form-control-plaintext text-bg-light border mb-3"
-            formControlName="titulo"
-            [ngClass]="{'is-invalid' : f.titulo.errors && f.titulo.touched}">
+            <label class="label my-2">Título</label>
+            <select class="form-control-plaintext text-bg-light border mb-3" formControlName="titulo"
+              [ngClass]="{'is-invalid' : f.titulo.errors && f.titulo.touched}">
               <option value=""></option>
               <option value="0">Outro</option>
               <option value="Senhorita">Tecnólogo(a)</option>
@@ -65,9 +64,9 @@
             </div>
           </div>
           <div class="form-group col-sm-5">
-            <label class="my-2">Primeiro Nome</label>
+            <label class="label my-2">Primeiro Nome</label>
             <input type="text" class="form-control mb-3" formControlName="primeiroNome"
-            [ngClass]="cssValidator(f.primeiroNome)" />
+              [ngClass]="cssValidator(f.primeiroNome)" />
             <div *ngIf="f.primeiroNome.errors?.required" class="invalid-feedback">
               Campo obrigatório!
             </div>
@@ -79,9 +78,9 @@
             </div>
           </div>
           <div class="form-group col-sm-5">
-            <label class="my-2">Último nome</label>
+            <label class="label my-2">Último nome</label>
             <input type="text" class="form-control mb-3" formControlName="ultimoNome"
-            [ngClass]="cssValidator(f.ultimoNome)"/>
+              [ngClass]="cssValidator(f.ultimoNome)" />
             <div *ngIf="f.ultimoNome.errors?.required" class="invalid-feedback">
               Campo obrigatório!
             </div>
@@ -95,9 +94,8 @@
         </div>
         <div class="row">
           <div class="form-group col-sm-5">
-            <label class="mb-2">E-mail</label>
-            <input type="text" class="form-control mb-3" formControlName="email"
-            [ngClass]="cssValidator(f.email)" />
+            <label class="label mb-2">E-mail</label>
+            <input type="text" class="form-control mb-3" formControlName="email" [ngClass]="cssValidator(f.email)" />
             <div *ngIf="f.email.errors?.required" class="invalid-feedback">
               Campo obrigatório!
             </div>
@@ -106,18 +104,17 @@
             </div>
           </div>
           <div class="form-group col-sm-4">
-            <label class="mb-2">Telefone</label>
+            <label class="label mb-2">Telefone</label>
             <input type="text" class="form-control mb-3" formControlName="telefone"
-            [ngClass]="cssValidator(f.telefone)" />
+              [ngClass]="cssValidator(f.telefone)" />
             <div *ngIf="f.telefone.errors?.required" class="invalid-feedback">
               Campo obrigatório!
             </div>
           </div>
           <div class="form-group col-sm">
-            <label class="mb-2">Função</label>
-            <select class="form-control-plaintext text-bg-light border mb-3"
-            [ngClass]="cssValidator(f.funcao)"
-            formControlName="funcao">
+            <label class="label mb-2">Função</label>
+            <select class="form-control-plaintext text-bg-light border mb-3" [ngClass]="cssValidator(f.funcao)"
+              formControlName="funcao">
               <option value=""></option>
               <option value="Participante">Participante</option>
               <option value="Palestrante">Palestrante</option>
@@ -127,9 +124,9 @@
             </div>
           </div>
           <form-group class="col-12">
-            <label class="mb-2">Descrição</label>
+            <label class="label mb-2">Descrição</label>
             <input type="text" class="form-control mb-2" formControlName="descricao"
-            [ngClass]="cssValidator(f.descricao)" />
+              [ngClass]="cssValidator(f.descricao)" />
             <div *ngIf="f.descricao.errors?.required" class="invalid-feedback">
               Campo obrigatório!
             </div>
@@ -147,9 +144,8 @@
         </div>
         <div class="row">
           <div class="form-group col-sm">
-            <label class="my-2">Senha</label>
-            <input type="password" class="form-control"  formControlName="senha"
-            [ngClass]="cssValidator(f.senha)"/>
+            <label class="label my-2">Senha</label>
+            <input type="password" class="form-control" formControlName="senha" [ngClass]="cssValidator(f.senha)" />
             <div *ngIf="f.senha.errors?.required" class="invalid-feedback">
               Campo obrigatório!
             </div>
@@ -161,9 +157,9 @@
             </div>
           </div>
           <div class="form-group col-sm">
-            <label class="my-2">Confirmar Senha</label>
+            <label class="label my-2">Confirmar Senha</label>
             <input type="password" class="form-control " formControlName="confirmarSenha"
-            [ngClass]="cssValidator(f.confirmarSenha)"/>
+              [ngClass]="cssValidator(f.confirmarSenha)" />
             <div *ngIf="f.confirmarSenha.errors?.required" class="invalid-feedback">
               Campo obrigatório!
             </div>
@@ -187,4 +183,3 @@
     </div>
   </form>
 </div>
-

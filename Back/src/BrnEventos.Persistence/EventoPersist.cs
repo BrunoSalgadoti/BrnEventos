@@ -14,8 +14,8 @@ namespace BrnEventos.Persistence
         public EventoPersist(BrnEventosContext context)
         {
             _context = context;
-                            //Infere o NoTracking em todo EventoPersist
-           // _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking; 
+            //Infere o NoTracking em todo EventoPersist
+            // _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking; 
         }
 
         public async Task<Evento[]> GetAllEventosAsync(bool includePalestrantes = false)
@@ -30,8 +30,8 @@ namespace BrnEventos.Persistence
                         .Include(e => e.PalestrantesEventos)
                         .ThenInclude(pe => pe.Palestrante);
             }
-                           
-                query = query.AsNoTracking().OrderBy(e => e.Id); //Infere o NoTracking somente no metódo desejado 
+
+            query = query.AsNoTracking().OrderBy(e => e.Id); //Infere o NoTracking somente no metódo desejado 
 
             return await query.ToArrayAsync();
         }
