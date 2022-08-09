@@ -33,6 +33,7 @@ i {
 .card {
   background-color: transparent;
   margin-bottom: 2px;
+  margin-top: 0;
 }
 .btn-outline-secondary{
  box-sizing: 2;
@@ -48,5 +49,16 @@ i {
   font-style: normal;
   font-weight: bold;
   margin-top: 1vw;
+}
+.card-evento-view{
+  position: sticky;
+  top: 2%;
+}
+.card-img-block{
+  img {
+    cursor: pointer;
+    border-radius: 3px 3px 0 0;
+    width: 100%;
+  }
 }
 

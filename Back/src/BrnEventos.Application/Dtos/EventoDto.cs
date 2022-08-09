@@ -24,9 +24,8 @@ namespace BrnEventos.Application.Dtos
         Display(Name = "Qtd Pessoas")]
         public int QtdPessoas { get; set; }
 
-        [Required(ErrorMessage = "O Campo {0} é obrigatório!")]
         [RegularExpression(@".*\.(gif|jpe?g|bmp|png)$",
-                           ErrorMessage = "Não é uma imagem válida. (gif, jpg, jpeg, bmp, png)")]
+                     ErrorMessage = "Não é uma imagem válida. (gif, jpg, jpeg, bmp, png)")]
         public string ImagemURL { get; set; }
 
         [Required(ErrorMessage = "O Campo {0} é obrigatório!"),

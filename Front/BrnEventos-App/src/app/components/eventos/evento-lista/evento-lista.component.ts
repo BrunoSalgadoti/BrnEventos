@@ -7,6 +7,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 import { EventoService } from '@app/services/evento.service';
 import { Evento } from '@app/models/Evento';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-evento-lista',
@@ -60,6 +61,12 @@ export class EventoListaComponent implements OnInit {
 
   public alterarImagem(): void {
     this.showimg = !this.showimg;
+  }
+
+  public mostrarImagem(imagemURL: string): string {
+    return imagemURL != ''
+    ? `${environment.apiURL}resources/images/${imagemURL}`
+    : `assets/img/SemImagem.gif`
   }
 
   public carregarEventos(): void {
