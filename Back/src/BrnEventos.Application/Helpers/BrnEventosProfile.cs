@@ -1,6 +1,7 @@
 using AutoMapper;
 using BrnEventos.Domain;
 using BrnEventos.Application.Dtos;
+using BrnEventos.Domain.Identity;
 
 namespace BrnEventos.Application.Helpers
 {
@@ -12,6 +13,10 @@ namespace BrnEventos.Application.Helpers
         CreateMap<Lote, LoteDto>().ReverseMap();
         CreateMap<Palestrante, PalestranteDto>().ReverseMap();
         CreateMap<RedeSocial, RedeSocialDto>().ReverseMap();
+
+        CreateMap<User, UserDto>().ReverseMap();
+        CreateMap<User, UserLoginDto>().ReverseMap();
+        CreateMap<User, UserUpdateDto>().ReverseMap();
        } 
     }
 }

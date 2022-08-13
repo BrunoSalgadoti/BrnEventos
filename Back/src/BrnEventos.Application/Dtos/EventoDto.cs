@@ -36,6 +36,8 @@ namespace BrnEventos.Application.Dtos
         EmailAddress(ErrorMessage = "O {0} digitado é inválido!"),
         Display(Name = "E-mail")]
         public string Email { get; set; }
+        public int UserId { get; set; }
+        public UserDto userDto { get; set; }
         public IEnumerable<LoteDto> Lotes { get; set; }
         public IEnumerable<RedeSocialDto> RedesSociais { get; set; }
         public IEnumerable<PalestranteDto> PalestrantesEventos { get; set; }

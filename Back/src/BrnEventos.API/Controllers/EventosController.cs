@@ -7,18 +7,25 @@ using BrnEventos.Application.Dtos;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using System.Linq;
+using BrnEventos.API.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BrnEventos.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class EventosController : ControllerBase
     {
         private readonly IEventoService _eventoService;
         private readonly IWebHostEnvironment _hostEnvironment;
+        private readonly IAccountService _accountService;
 
-        public EventosController(IEventoService eventoService, IWebHostEnvironment hostEnvironment)
+        public EventosController(IEventoService eventoService,
+                                 IWebHostEnvironment hostEnvironment,
+                                 IAccountService accountService)
         {
+            _accountService = accountService;
             _eventoService = eventoService;
             _hostEnvironment = hostEnvironment;
         }
@@ -28,14 +35,14 @@ namespace BrnEventos.API.Controllers
         {
             try
             {
-                var eventos = await _eventoService.GetAllEventosAsync(true);
+                var eventos = await _eventoService.GetAllEventosAsync(User.GetUserId(), true);
                 if (eventos == null) return NoContent();
                 return Ok(eventos);
             }
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Erro ao tentar recuperar eventos! Erro: {ex.Message}");
+                $"Erro ao tentar recuperar eventos! Erro:{ex.Message}");
             }
         }
 
@@ -44,7 +51,7 @@ namespace BrnEventos.API.Controllers
         {
             try
             {
-                var evento = await _eventoService.GetEventoByIdAsync(id, true);
+                var evento = await _eventoService.GetEventoByIdAsync(User.GetUserId(), id, true);
                 if (evento == null) return NoContent();
 
                 return Ok(evento);
@@ -52,7 +59,7 @@ namespace BrnEventos.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Erro ao tentar recuperar eventos! Erro: {ex.Message}");
+                $"Erro ao tentar recuperar eventos! Erro:{ex.Message}");
             }
         }
 
@@ -61,7 +68,7 @@ namespace BrnEventos.API.Controllers
         {
             try
             {
-                var evento = await _eventoService.GetAllEventosByTemaAsync(tema, true);
+                var evento = await _eventoService.GetAllEventosByTemaAsync(User.GetUserId(), tema, true);
                 if (evento == null) return NoContent();
 
                 return Ok(evento);
@@ -69,7 +76,7 @@ namespace BrnEventos.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Erro ao tentar recuperar eventos! Erro: {ex.Message}");
+                $"Erro ao tentar recuperar eventos! Erro:{ex.Message}");
             }
         }
 
@@ -78,7 +85,7 @@ namespace BrnEventos.API.Controllers
         {
             try
             {
-                var evento = await _eventoService.GetEventoByIdAsync(eventoId, true);
+                var evento = await _eventoService.GetEventoByIdAsync(User.GetUserId(), eventoId, true);
                 if (evento == null) return NoContent();
 
                 var file = Request.Form.Files[0];
@@ -87,7 +94,7 @@ namespace BrnEventos.API.Controllers
                     DeleteImage(evento.ImagemURL);
                     evento.ImagemURL = await SaveImage(file);
                 }
-                var EventoRetorno = await _eventoService.UpdateEvento(eventoId, evento);
+                var EventoRetorno = await _eventoService.UpdateEvento(User.GetUserId(), eventoId, evento);
 
                 return Ok(EventoRetorno);
             }
@@ -103,7 +110,7 @@ namespace BrnEventos.API.Controllers
         {
             try
             {
-                var evento = await _eventoService.AddEventos(model);
+                var evento = await _eventoService.AddEventos(User.GetUserId(), model);
                 if (evento == null) return NoContent();
 
                 return Ok(evento);
@@ -111,7 +118,7 @@ namespace BrnEventos.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Erro ao tentar adicionar eventos! Erro: {ex.Message}");
+                $"Erro ao tentar adicionar eventos! Erro:{ex.Message}");
             }
         }
 
@@ -120,7 +127,7 @@ namespace BrnEventos.API.Controllers
         {
             try
             {
-                var evento = await _eventoService.UpdateEvento(id, model);
+                var evento = await _eventoService.UpdateEvento(User.GetUserId(), id, model);
                 if (evento == null) return NoContent();
 
                 return Ok(evento);
@@ -128,7 +135,7 @@ namespace BrnEventos.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Erro ao tentar atualizar eventos! Erro: {ex.Message}");
+                $"Erro ao tentar atualizar eventos! Erro:{ex.Message}");
             }
         }
 
@@ -137,10 +144,10 @@ namespace BrnEventos.API.Controllers
         {
             try
             {
-                var evento = await _eventoService.GetEventoByIdAsync(id, true);
+                var evento = await _eventoService.GetEventoByIdAsync(User.GetUserId(), id, true);
                 if (evento == null) return NoContent();
 
-                if (await _eventoService.DeleteEvento(id))
+                if (await _eventoService.DeleteEvento(User.GetUserId(), id))
                 {
                     DeleteImage(evento.ImagemURL);
                     return Ok(new { menssage = "Deletado" });
@@ -153,7 +160,7 @@ namespace BrnEventos.API.Controllers
             catch (Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError,
-                $"Erro ao tentar deletar eventos! Erro: {ex.Message}");
+                $"Erro ao tentar deletar eventos! Erro:{ex.Message}");
             }
         }
 
