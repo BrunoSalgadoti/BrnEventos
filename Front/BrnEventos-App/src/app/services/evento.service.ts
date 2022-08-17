@@ -1,21 +1,21 @@
 import { Evento } from './../models/Evento';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take } from 'rxjs';
 import { environment } from '@environments/environment';
 
 @Injectable(
   // Declarado em (app.module.ts)
-  //{providedIn: 'root'} <-----Implementa o service na raiz do app para todos os components
+  //{providedIn: 'root'}
 )
 export class EventoService {
-  baseURL = environment.apiURL + 'api/eventos'
+  baseURL = environment.apiURL + 'api/eventos';
 
   constructor(private http: HttpClient) { }
 
   public getEventos(): Observable<Evento[]> {
     return this.http
-      .get<Evento[]>(this.baseURL)
+      .get<Evento[]>(this.baseURL )
       .pipe(take(1));
   }
 

@@ -1,3 +1,7 @@
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { AccountService } from './../../../services/account.service';
+import { UserLogin } from './../../../models/identity/UserLogin';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +10,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  model = {} as UserLogin;
 
-  constructor() { }
+  constructor(private accountService: AccountService,
+              private router: Router,
+              private toaster: ToastrService) {  }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  public login(): void {
+    this.accountService.login(this.model).subscribe({
+     next: () => {
+        this.router.navigateByUrl('/dashboard');
+      },
+     error: (error: any) => {
+        if (error.status == 401)
+          this.toaster.error('Usuário ou senha inválido!')
+        else
+          console.error(error);
+      }
+  })
   }
 
 }

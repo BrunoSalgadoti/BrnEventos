@@ -9,7 +9,7 @@
 
   <div class="col-md-6">
 
-    <form [formGroup]="form" class="p-1">
+    <form [formGroup]="form" class="p-1" (ngSubmit)="register()">
       <div class="pb-2 d-block d-md-none">
         <h3 class="border-bottom">Cadastro de Usuário</h3>
       </div>
@@ -56,41 +56,41 @@
       </div>
       <div class="form-group">
         <label for="" class="label">Usuario:</label>
-        <input type="text" class="form-control" formControlName="usuario" [ngClass]="cssValidator(f.usuario)"
+        <input type="text" class="form-control" formControlName="userName" [ngClass]="cssValidator(f.userName)"
           placeholder="Insira o nome de Usuário" />
-        <div *ngIf="f.usuario.errors?.required" class="invalid-feedback">
+        <div *ngIf="f.userName.errors?.required" class="invalid-feedback">
           Campo obrigatório!
         </div>
-        <div *ngIf="f.usuario.errors?.minlength" class="invalid-feedback">
+        <div *ngIf="f.userName.errors?.minlength" class="invalid-feedback">
           O nome de Usuário deve conter no mínimo 3 caracteres.
         </div>
-        <div *ngIf="f.usuario.errors?.maxlength" class="invalid-feedback">
+        <div *ngIf="f.userName.errors?.maxlength" class="invalid-feedback">
           O nome de Usuário deve conter no máximo 30 caracteres.
         </div>
       </div>
       <div class="row  mb-lg-3">
         <div class="form-group col-sm-6">
           <label for="" class=" label">Senha:</label>
-          <input type="password" class="form-control" formControlName="senha" [ngClass]="cssValidator(f.senha)"
+          <input type="password" class="form-control" formControlName="password" [ngClass]="cssValidator(f.password)"
             placeholder="Digite uma Senha" />
-          <div *ngIf="f.senha.errors?.required" class="invalid-feedback">
+          <div *ngIf="f.password.errors?.required" class="invalid-feedback">
             Campo obrigatório!
           </div>
-          <div *ngIf="f.senha.errors?.minlength" class="invalid-feedback">
+          <div *ngIf="f.password.errors?.minlength" class="invalid-feedback">
             A senha deve conter no mínimo 6 caracteres.
           </div>
-          <div *ngIf="f.senha.errors?.maxlength" class="invalid-feedback">
+          <div *ngIf="f.password.errors?.maxlength" class="invalid-feedback">
             A senha deve conter deve conter no máximo 30 caracteres.
           </div>
         </div>
         <div class="form-group col-sm-6">
           <label for="" class="label">Confirmar Senha:</label>
-          <input type="password" class="form-control" formControlName="confirmarSenha"
-            [ngClass]="cssValidator(f.confirmarSenha)" placeholder="Confirme a Senha" />
-          <div *ngIf="f.confirmarSenha.errors?.required" class="invalid-feedback">
+          <input type="password" class="form-control" formControlName="confirmarPassword"
+            [ngClass]="cssValidator(f.confirmarPassword)" placeholder="Confirme a Password" />
+          <div *ngIf="f.confirmarPassword.errors?.required" class="invalid-feedback">
             Campo obrigatório!
           </div>
-          <div *ngIf="f.confirmarSenha.errors?.mustMatch" class="invalid-feedback">
+          <div *ngIf="f.confirmarPassword.errors?.mustMatch" class="invalid-feedback">
             Senha não confere! Tente Novamente!
           </div>
         </div>
@@ -103,7 +103,7 @@
       </div>
       <div class="row">
         <div class="d-flex col-12">
-          <button class="btn btn-lg btn-success btn-block flex-fill mb-lg-3" [disabled]="!form.valid">
+          <button class="btn btn-lg btn-success btn-block flex-fill mb-lg-3" type="submit" [disabled]="!form.valid">
             Registar
           </button>
         </div>

@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'
+import { NgModule } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -28,14 +28,18 @@ import { PerfilComponent } from './components/user/perfil/perfil.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { EventoDetalheComponent } from './components/eventos/evento-detalhe/evento-detalhe.component';
 import { EventoListaComponent } from './components/eventos/evento-lista/evento-lista.component';
+import { HomeComponent } from './components/home/home.component';
 
 import { EventoService } from './services/evento.service';
 import { LoteService } from './services/lote.service';
+import { AccountService } from './services/account.service';
+
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 import { DateTimeFormatPipe } from './helpers/DateTimeFormat.pipe';
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
-import { RegistroComponent } from './components/user/registro/registro.component';
+import { RegistrationComponent } from './components/user/registration/registration.component';
 
 defineLocale('pt-br', ptBrLocale);
 
@@ -53,9 +57,10 @@ defineLocale('pt-br', ptBrLocale);
     EventoDetalheComponent,
     EventoListaComponent,
     UserComponent,
+    HomeComponent,
     LoginComponent,
-    RegistroComponent
-   ],
+    RegistrationComponent
+  ],
   imports: [
     BrowserModule,
     FormsModule,
@@ -70,18 +75,19 @@ defineLocale('pt-br', ptBrLocale);
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
     ToastrModule.forRoot({
-        timeOut: 3000,
-        positionClass: 'toast-bottom-right',
-        preventDuplicates: true,
-        progressBar: true
-      }),
+      timeOut: 3000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      progressBar: true
+    }),
     NgxSpinnerModule
   ],
   providers: [
-    EventoService,    //<--- implementa o service em todos as declarations de components
-    LoteService
+    EventoService,
+    LoteService,
+    AccountService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

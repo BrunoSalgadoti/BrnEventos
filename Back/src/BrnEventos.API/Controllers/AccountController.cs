@@ -41,7 +41,7 @@ namespace BrnEventos.API.Controllers
         }
 
         [HttpPost("Register")]
-        [AllowAnonymous]     // <------ ter autorização sem passar pelo Token "ou colocar o token"
+        [AllowAnonymous]
         public async Task<IActionResult> Register(UserDto userDto)
         {
             try
@@ -51,7 +51,12 @@ namespace BrnEventos.API.Controllers
 
                 var user = await _accountService.CreateAccountAsync(userDto);
                 if (user != null)
-                    return Ok(user);
+                    return Ok(new
+                    {
+                        userName = user.UserName,
+                        PrimeiroNome = user.PrimeiroNome,
+                        token = _tokenService.CreateToken(user).Result
+                    });
 
                 return BadRequest("Usuário não criado, tente novamente mais tarde!");
             }
@@ -63,7 +68,7 @@ namespace BrnEventos.API.Controllers
         }
 
         [HttpPost("login")]
-        [AllowAnonymous]     
+        [AllowAnonymous]
         public async Task<IActionResult> Login(UserLoginDto userLogin)
         {
             try
@@ -78,7 +83,8 @@ namespace BrnEventos.API.Controllers
                 {
                     userName = user.UserName,
                     PrimeiroNome = user.PrimeiroNome,
-                    token = _tokenService.CreateToken(user).Result                }
+                    token = _tokenService.CreateToken(user).Result
+                }
                 );
             }
             catch (Exception ex)
@@ -88,18 +94,26 @@ namespace BrnEventos.API.Controllers
             }
         }
 
-        [HttpPut("UpdateUser")]   
+        [HttpPut("UpdateUser")]
         public async Task<IActionResult> UpdateUser(UserUpdateDto userUpdateDto)
         {
             try
             {
-                 var user = await _accountService.GetUserByUserNameAsync(User.GetUserName());
-                 if (user == null) return Unauthorized("Usuário Inválido!");
+                if (userUpdateDto.UserName != User.GetUserName())
+                    return Unauthorized("Usuário Inválido");
+
+                var user = await _accountService.GetUserByUserNameAsync(User.GetUserName());
+                if (user == null) return Unauthorized("Usuário Inválido!");
 
                 var userReturn = await _accountService.UpdateAccount(userUpdateDto);
                 if (userReturn == null) return NoContent();
 
-                return Ok(userReturn);
+                return Ok(new 
+                {
+                    userName = userReturn.UserName,
+                    PrimeiroNome = userReturn.PrimeiroNome,
+                    token = _tokenService.CreateToken(userReturn).Result
+                });
             }
             catch (Exception ex)
             {
