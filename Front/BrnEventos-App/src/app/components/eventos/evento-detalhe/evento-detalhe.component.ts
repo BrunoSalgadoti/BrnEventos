@@ -45,7 +45,7 @@ export class EventoDetalheComponent implements OnInit {
     return {
       isAnimated: true,
       adaptivePosition: true,
-      dateInputFormat: 'DD/MM/YYYY HH:mm A',
+      dateInputFormat: 'DD/MM/YYYY HH:mm',
       containerClass: 'theme-default',
       showWeekNumbers: false,
     }

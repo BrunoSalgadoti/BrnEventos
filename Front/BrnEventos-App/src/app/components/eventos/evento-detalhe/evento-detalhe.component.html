@@ -39,7 +39,7 @@
               <label class="label">Data e Hora</label>
               <input type="datetime" class="form-control" [ngClass]="cssValidator(f.dataEvento)"
               formControlName="dataEvento" placeholder="Data e Hora do Evento" bsDatepicker [bsConfig]="bsConfig"
-              value="{{evento.dataEvento | DateTimeFormatPipe}}" [(ngModel)]="evento.dataEvento">
+              value="{{evento.dataEvento | DateTimeFormatPipe }}" [(ngModel)]="evento.dataEvento">
               <div *ngIf="f.dataEvento.errors?.required" class="invalid-feedback">
                 * Campo obrigatório!
               </div>

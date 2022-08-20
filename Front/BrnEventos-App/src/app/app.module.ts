@@ -16,6 +16,7 @@ import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxCurrencyModule } from 'ngx-currency';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -74,6 +75,7 @@ defineLocale('pt-br', ptBrLocale);
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-bottom-right',

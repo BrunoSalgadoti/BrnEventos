@@ -6,6 +6,7 @@ using BrnEventos.Domain;
 using BrnEventos.Persistence.Contratos;
 using BrnEventos.Application.Dtos;
 using AutoMapper;
+using BrnEventos.Persistence.Models;
 
 namespace BrnEventos.Application
 {
@@ -94,16 +95,21 @@ namespace BrnEventos.Application
             }
         }
 
-        public async Task<EventoDto[]> GetAllEventosAsync(int userId, bool includePalestrantes = false)
+        public async Task<PageList<EventoDto>> GetAllEventosAsync(int userId, PageParams pageParams, bool includePalestrantes = false)
         {
             try
             {
-                var eventos = await _eventoPersist.GetAllEventosAsync(userId, includePalestrantes);
+                var eventos = await _eventoPersist.GetAllEventosAsync(userId, pageParams, includePalestrantes);
                 if (eventos == null) return null;
 
                 var eventosRetorno = new List<EventoDto>();
 
-                var resultado = _mapper.Map<EventoDto[]>(eventos);
+                var resultado = _mapper.Map<PageList<EventoDto>>(eventos);
+
+                resultado.CurrentPage = eventos.CurrentPage;
+                resultado.TotalPages = eventos.TotalPages;
+                resultado.PageSize = eventos.PageSize;
+                resultado.TotalCount = eventos.TotalCount;
 
                 return resultado;
             }
@@ -113,24 +119,7 @@ namespace BrnEventos.Application
             }
         }
 
-        public async Task<EventoDto[]> GetAllEventosByTemaAsync(int userId, string tema, bool includePalestrantes = false)
-        {
-            try
-            {
-                var eventos = await _eventoPersist.GetAllEventosByTemaAsync(userId, tema, includePalestrantes);
-                if (eventos == null) return null;
-
-                var resultado = _mapper.Map<EventoDto[]>(eventos);
-
-                return resultado;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public async Task<EventoDto> GetEventoByIdAsync(int userId, int eventoId, bool includePalestrantes = false)
+              public async Task<EventoDto> GetEventoByIdAsync(int userId, int eventoId, bool includePalestrantes = false)
         {
             try
             {
