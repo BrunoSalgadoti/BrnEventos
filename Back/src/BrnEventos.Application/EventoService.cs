@@ -65,7 +65,7 @@ namespace BrnEventos.Application
                 _geralPersist.Update<Evento>(evento);
                 if (await _geralPersist.SaveChangesAsync())
                 {
-                    var eventoRetorno = await _eventoPersist.GetEventoByIdAsync(eventoId, evento.Id, false);
+                    var eventoRetorno = await _eventoPersist.GetEventoByIdAsync(userId, evento.Id, false);
 
                     return _mapper.Map<EventoDto>(eventoRetorno);
                 }

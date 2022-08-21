@@ -1,13 +1,12 @@
 using System.Threading.Tasks;
 using BrnEventos.Domain;
+using BrnEventos.Persistence.Models;
 
 namespace BrnEventos.Persistence.Contratos
 {
-    public interface IPalestrantesPersist
+    public interface IPalestrantePersist : IGeralPersist
     {
-        //PALESTRANTES
-        Task<Palestrante[]> GetAllPalestrantesByNomeAsync(string nome, bool includeEventos);
-        Task<Palestrante[]> GetAllPalestrantesAsync(bool includeEventos);
-        Task<Palestrante> GetPalestranteByIdAsync(int palestranteId, bool includeEventos);
+        Task<PageList<Palestrante>> GetAllPalestrantesAsync(PageParams pageparams, bool includeEventos = false);
+        Task<Palestrante> GetPalestranteByUserIdAsync(int userId, bool includeEventos = false);
     }
 }

@@ -36,5 +36,9 @@ namespace BrnGeral.Persistence
         {
             return (await _context.SaveChangesAsync()) > 0;
         }
+
+        public interface IRedeSocialPersist
+        {
+        }
     }
 }
