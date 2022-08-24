@@ -63,10 +63,10 @@ export class EventoService {
       .pipe(take(1));
   }
 
-  public postUpLoad(eventoId: number, file: File): Observable<Evento> {
-    const fileUpload = file[0] as File;
+  public postUpload(eventoId: number, file: File): Observable<Evento> {
+    const fileToUpload = file[0] as File;
     const formData = new FormData();
-    formData.append('file', fileUpload);
+    formData.append('file', fileToUpload);
 
     return this.http
         .post<Evento>(`${this.baseURL}/upload-image/${eventoId}`, formData)

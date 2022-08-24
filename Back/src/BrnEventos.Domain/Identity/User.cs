@@ -14,6 +14,7 @@ namespace BrnEventos.Domain.Identity
         public Titulo Titulo { get; set; }
         public string Descricao { get; set; }
         public Funcao funcao { get; set; }
+        public string ImagemURL { get; set; }
         public IEnumerable<UserRole> UserRoles { get; set; }
     }
 }

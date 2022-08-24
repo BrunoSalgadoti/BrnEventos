@@ -27,7 +27,7 @@ export class EventoDetalheComponent implements OnInit {
   form!: FormGroup;
   estadoSalvar = 'post';
   loteAtual = { id: 0, nome: '', indice: 0 };
-  imagemURL = 'assets/img/upload.png'
+  imagemURL = 'assets/img/upload.png';
   file!: File;
 
   get modoEditar(): boolean {
@@ -226,7 +226,7 @@ export class EventoDetalheComponent implements OnInit {
 
   public uploadImage(): void {
     this.spinner.show();
-    this.eventoService.postUpLoad(this.eventoId, this.file).subscribe(
+    this.eventoService.postUpload(this.eventoId, this.file).subscribe(
       () => {
         this.carregarEvento();
         this.toastr.success('Imagem atualizada com sucesso!', 'Sucesso!');

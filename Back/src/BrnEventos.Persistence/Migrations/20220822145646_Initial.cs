@@ -3,48 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BrnEventos.Persistence.Migrations
 {
-    public partial class AdicionandoIdentity : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_RedesSociais_Eventos_EventoId",
-                table: "RedesSociais");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_RedesSociais_Palestrantes_PalestranteId",
-                table: "RedesSociais");
-
-            migrationBuilder.DropColumn(
-                name: "Email",
-                table: "Palestrantes");
-
-            migrationBuilder.DropColumn(
-                name: "ImagemURL",
-                table: "Palestrantes");
-
-            migrationBuilder.DropColumn(
-                name: "Nome",
-                table: "Palestrantes");
-
-            migrationBuilder.DropColumn(
-                name: "Telefone",
-                table: "Palestrantes");
-
-            migrationBuilder.AddColumn<int>(
-                name: "UserId",
-                table: "Palestrantes",
-                type: "INTEGER",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<int>(
-                name: "UserId",
-                table: "Eventos",
-                type: "INTEGER",
-                nullable: false,
-                defaultValue: 0);
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -71,6 +33,7 @@ namespace BrnEventos.Persistence.Migrations
                     Titulo = table.Column<int>(type: "INTEGER", nullable: false),
                     Descricao = table.Column<string>(type: "TEXT", nullable: true),
                     funcao = table.Column<int>(type: "INTEGER", nullable: false),
+                    ImagemURL = table.Column<string>(type: "TEXT", nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -197,15 +160,127 @@ namespace BrnEventos.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Palestrantes_UserId",
-                table: "Palestrantes",
-                column: "UserId");
+            migrationBuilder.CreateTable(
+                name: "Eventos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Local = table.Column<string>(type: "TEXT", nullable: true),
+                    DataEvento = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Tema = table.Column<string>(type: "TEXT", nullable: true),
+                    QtdPessoas = table.Column<int>(type: "INTEGER", nullable: false),
+                    ImagemURL = table.Column<string>(type: "TEXT", nullable: true),
+                    Telefone = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Eventos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Eventos_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Eventos_UserId",
-                table: "Eventos",
-                column: "UserId");
+            migrationBuilder.CreateTable(
+                name: "Palestrantes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    MiniCurriculo = table.Column<string>(type: "TEXT", nullable: true),
+                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Palestrantes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Palestrantes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Lotes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Nome = table.Column<string>(type: "TEXT", nullable: true),
+                    Preco = table.Column<decimal>(type: "TEXT", nullable: false),
+                    DataInicio = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    DataFim = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Quantidade = table.Column<int>(type: "INTEGER", nullable: false),
+                    EventoId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lotes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Lotes_Eventos_EventoId",
+                        column: x => x.EventoId,
+                        principalTable: "Eventos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PalestrantesEventos",
+                columns: table => new
+                {
+                    PalestranteId = table.Column<int>(type: "INTEGER", nullable: false),
+                    EventoId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PalestrantesEventos", x => new { x.EventoId, x.PalestranteId });
+                    table.ForeignKey(
+                        name: "FK_PalestrantesEventos_Eventos_EventoId",
+                        column: x => x.EventoId,
+                        principalTable: "Eventos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PalestrantesEventos_Palestrantes_PalestranteId",
+                        column: x => x.PalestranteId,
+                        principalTable: "Palestrantes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RedesSociais",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Nome = table.Column<string>(type: "TEXT", nullable: true),
+                    URL = table.Column<string>(type: "TEXT", nullable: true),
+                    EventoId = table.Column<int>(type: "INTEGER", nullable: true),
+                    PalestranteId = table.Column<int>(type: "INTEGER", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RedesSociais", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RedesSociais_Eventos_EventoId",
+                        column: x => x.EventoId,
+                        principalTable: "Eventos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RedesSociais_Palestrantes_PalestranteId",
+                        column: x => x.PalestranteId,
+                        principalTable: "Palestrantes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -244,57 +319,39 @@ namespace BrnEventos.Persistence.Migrations
                 column: "NormalizedUserName",
                 unique: true);
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Eventos_AspNetUsers_UserId",
+            migrationBuilder.CreateIndex(
+                name: "IX_Eventos_UserId",
                 table: "Eventos",
-                column: "UserId",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                column: "UserId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Palestrantes_AspNetUsers_UserId",
+            migrationBuilder.CreateIndex(
+                name: "IX_Lotes_EventoId",
+                table: "Lotes",
+                column: "EventoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Palestrantes_UserId",
                 table: "Palestrantes",
-                column: "UserId",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                column: "UserId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_RedesSociais_Eventos_EventoId",
-                table: "RedesSociais",
-                column: "EventoId",
-                principalTable: "Eventos",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.CreateIndex(
+                name: "IX_PalestrantesEventos_PalestranteId",
+                table: "PalestrantesEventos",
+                column: "PalestranteId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_RedesSociais_Palestrantes_PalestranteId",
+            migrationBuilder.CreateIndex(
+                name: "IX_RedesSociais_EventoId",
                 table: "RedesSociais",
-                column: "PalestranteId",
-                principalTable: "Palestrantes",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                column: "EventoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RedesSociais_PalestranteId",
+                table: "RedesSociais",
+                column: "PalestranteId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Eventos_AspNetUsers_UserId",
-                table: "Eventos");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Palestrantes_AspNetUsers_UserId",
-                table: "Palestrantes");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_RedesSociais_Eventos_EventoId",
-                table: "RedesSociais");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_RedesSociais_Palestrantes_PalestranteId",
-                table: "RedesSociais");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -311,66 +368,25 @@ namespace BrnEventos.Persistence.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Lotes");
+
+            migrationBuilder.DropTable(
+                name: "PalestrantesEventos");
+
+            migrationBuilder.DropTable(
+                name: "RedesSociais");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Eventos");
+
+            migrationBuilder.DropTable(
+                name: "Palestrantes");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Palestrantes_UserId",
-                table: "Palestrantes");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Eventos_UserId",
-                table: "Eventos");
-
-            migrationBuilder.DropColumn(
-                name: "UserId",
-                table: "Palestrantes");
-
-            migrationBuilder.DropColumn(
-                name: "UserId",
-                table: "Eventos");
-
-            migrationBuilder.AddColumn<string>(
-                name: "Email",
-                table: "Palestrantes",
-                type: "TEXT",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "ImagemURL",
-                table: "Palestrantes",
-                type: "TEXT",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Nome",
-                table: "Palestrantes",
-                type: "TEXT",
-                nullable: true);
-
-            migrationBuilder.AddColumn<string>(
-                name: "Telefone",
-                table: "Palestrantes",
-                type: "TEXT",
-                nullable: true);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_RedesSociais_Eventos_EventoId",
-                table: "RedesSociais",
-                column: "EventoId",
-                principalTable: "Eventos",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_RedesSociais_Palestrantes_PalestranteId",
-                table: "RedesSociais",
-                column: "PalestranteId",
-                principalTable: "Palestrantes",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
         }
     }
 }

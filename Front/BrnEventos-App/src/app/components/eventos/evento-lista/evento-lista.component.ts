@@ -59,7 +59,7 @@ export class EventoListaComponent implements OnInit {
     private modalService: BsModalService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
-    private router: Router,
+    private router: Router
   ) { }
 
   public ngOnInit(): void {

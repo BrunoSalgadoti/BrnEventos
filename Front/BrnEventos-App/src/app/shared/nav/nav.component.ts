@@ -13,15 +13,14 @@ export class NavComponent implements OnInit {
   constructor(public accountService: AccountService,
               private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {  }
 
   logout(): void {
-    this.accountService.logout();
+    localStorage.removeItem('user');
     this.router.navigateByUrl('/user/login');
   }
 
   showMenu(): boolean {
-    return this.router.url !== '/user/login';
+    return this.router.url != '/user/login';
   }
-
 }

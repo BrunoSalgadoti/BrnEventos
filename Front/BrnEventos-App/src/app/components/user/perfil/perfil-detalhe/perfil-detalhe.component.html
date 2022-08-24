@@ -1,0 +1,133 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+  <div class="row">
+    <div class="form-group col-12">
+      <h3 class="border-bottom">Detalhe Perfil</h3>
+    </div>
+    <div class="form-group col">
+      <label class="label my-2">Título</label>
+      <select class="form-control-plaintext text-bg-light border mb-3" formControlName="titulo"
+        [ngClass]="{'is-invalid' : f.titulo.errors && f.titulo.touched}">
+        <option value="NaoInformado">Outro</option>
+        <option value="Tecnologo">Tecnólogo(a)</option>
+        <option value="Bacharel">Bacharel</option>
+        <option value="Especialista">Especialista</option>
+        <option value="PosGraduado">Pós Graduado(a)</option>
+        <option value="Mestrado">Mestre</option>
+        <option value="Doutorado">Doutor(a)</option>
+        <option value="PosDoutorado">Pós Doutorado</option>
+      </select>
+      <div *ngIf="f.titulo.errors?.required" class="invalid-feedback">
+        Campo obrigatório!
+      </div>
+    </div>
+    <div class="form-group col-sm-5">
+      <label class="label my-2">Primeiro Nome</label>
+      <input type="text" class="form-control mb-3" formControlName="primeiroNome"
+        [ngClass]="cssValidator(f.primeiroNome)" />
+      <div *ngIf="f.primeiroNome.errors?.required" class="invalid-feedback">
+        Campo obrigatório!
+      </div>
+      <div *ngIf="f.primeiroNome.errors?.minlength" class="invalid-feedback">
+        O Primeiro nome deve conter no mínimo 3 caracteres.
+      </div>
+      <div *ngIf="f.primeiroNome.errors?.maxlength" class="invalid-feedback">
+        O Primeiro nome deve conter no máximo 20 caracteres.
+      </div>
+    </div>
+    <div class="form-group col-sm-5">
+      <label class="label my-2">Último nome</label>
+      <input type="text" class="form-control mb-3" formControlName="ultimoNome"
+        [ngClass]="cssValidator(f.ultimoNome)" />
+      <div *ngIf="f.ultimoNome.errors?.required" class="invalid-feedback">
+        Campo obrigatório!
+      </div>
+      <div *ngIf="f.ultimoNome.errors?.minlength" class="invalid-feedback">
+        O Segundo nome deve conter no mínimo 3 caracteres.
+      </div>
+      <div *ngIf="f.ultimoNome.errors?.maxlength" class="invalid-feedback">
+        O Segundo nome deve conter no máximo 20 caracteres.
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-5">
+      <label class="label mb-2">E-mail</label>
+      <input type="text" class="form-control mb-3" formControlName="email" [ngClass]="cssValidator(f.email)" />
+      <div *ngIf="f.email.errors?.required" class="invalid-feedback">
+        Campo obrigatório!
+      </div>
+      <div *ngIf="f.email.errors?.email" class="invalid-feedback">
+        E-mail Inválido! Insira um E-mail Válido!
+      </div>
+    </div>
+    <div class="form-group col-sm-4">
+      <label class="label mb-2">Telefone</label>
+      <input type="text" class="form-control mb-3" formControlName="phoneNumber"
+        [ngClass]="cssValidator(f.phoneNumber)" />
+      <div *ngIf="f.phoneNumber.errors?.required" class="invalid-feedback">
+        Campo obrigatório!
+      </div>
+    </div>
+    <div class="form-group col-sm">
+      <label class="label mb-2">Função</label>
+      <select class="form-control-plaintext text-bg-light border mb-3" [ngClass]="cssValidator(f.funcao)"
+        formControlName="funcao">
+        <option value="NaoInformado">Não Informado</option>
+        <option value="Participante">Participante</option>
+        <option value="Palestrante">Palestrante</option>
+      </select>
+      <div *ngIf="f.funcao.errors?.required" class="invalid-feedback">
+        Campo obrigatório!
+      </div>
+    </div>
+    <div class="form-group col-12">
+      <label class="label mb-2">Descrição</label>
+      <input type="text" class="form-control mb-2" formControlName="descricao" [ngClass]="cssValidator(f.descricao)" />
+      <div *ngIf="f.descricao.errors?.required" class="invalid-feedback">
+        Campo obrigatório!
+      </div>
+      <div *ngIf="f.descricao.errors?.minlength" class="invalid-feedback">
+        A descrição deve conter no mínimo 3 caracteres.
+      </div>
+      <div *ngIf="f.descricao.errors?.maxlength" class="invalid-feedback">
+        A descrição deve conter no máximo 120 caracteres.
+      </div>
+    </div>
+  </div>
+  <div>
+    <h3 class="pt-3 border-bottom">Mudar Senha</h3>
+    <p>Caso mude de senha, preencha os campos abaixo:</p>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm">
+      <label class="label my-2">Senha</label>
+      <input type="password" class="form-control" formControlName="password" [ngClass]="cssValidator(f.password)" />
+      <div *ngIf="f.password.errors?.minlength" class="invalid-feedback">
+        A senha deve conter no mínimo 6 caracteres.
+      </div>
+      <div *ngIf="f.password.errors?.maxlength" class="invalid-feedback">
+        A senha deve conter deve conter no máximo 30 caracteres.
+      </div>
+    </div>
+    <div class="form-group col-sm">
+      <label class="label my-2">Confirmar Senha</label>
+      <input type="password" class="form-control " formControlName="confirmarPassword"
+        [ngClass]="cssValidator(f.confirmarPassword)" />
+      <div *ngIf="f.confirmarPassword.errors?.mustMatch" class="invalid-feedback">
+        Senha não confere! Tente Novamente!
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer border-top">
+    <div class="d-flex my-1">
+      <button class="btn btn-outline-secondary me-auto border-2" (click)="resetForm($event)">
+        Cancelar Alteração
+      </button>
+      <button class="btn btn-success" type="submit">
+        <!-- <span class="spinner-border spinner-border-sm me-1"></span> -->
+        Salvar Alteração
+      </button>
+    </div>
+  </div>
+</form>

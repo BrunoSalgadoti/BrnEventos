@@ -18,7 +18,7 @@ namespace BrnEventos.API.Controllers
         private readonly IAccountService _accountService;
         private readonly ITokenService _tokenService;
         private readonly IUtil _util;
-        private readonly string _destino = "perfil";
+        private readonly string _destino = "Perfil";
 
         public AccountController(IAccountService accountService,
                                 ITokenService tokenService,

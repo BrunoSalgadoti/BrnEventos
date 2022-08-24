@@ -16,13 +16,13 @@ namespace BrnEventos.API.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class PalestranteController : ControllerBase
+    public class PalestrantesController : ControllerBase
     {
         private readonly IPalestranteService _palestranteService;
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly IAccountService _accountService;
 
-        public PalestranteController(IPalestranteService palestranteService,
+        public PalestrantesController(IPalestranteService palestranteService,
                                      IWebHostEnvironment hostEnvironment,
                                      IAccountService accountService)
         {

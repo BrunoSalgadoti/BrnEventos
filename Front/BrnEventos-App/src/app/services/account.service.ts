@@ -1,5 +1,5 @@
 import { environment } from '@environments/environment';
-import { take, Observable, ReplaySubject, tap, map } from 'rxjs';
+import { take, Observable, ReplaySubject, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '@app/models/identity/User';
@@ -10,11 +10,11 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<User | null>(1);
   public currentUser$ = this.currentUserSource.asObservable();
 
-  baseUrl = environment.apiURL + 'api/account/';
+  baseURL = environment.apiURL + 'api/account/';
   constructor(private http: HttpClient) { }
 
   public login(model: any): Observable<void> {
-    return this.http.post<User>(this.baseUrl + 'login', model).pipe(
+    return this.http.post<User>(this.baseURL + 'login', model).pipe(
       take(1),
       map((response: User) => {
         const user = response;
@@ -26,11 +26,11 @@ export class AccountService {
   }
 
   getUser(): Observable<UserUpdate> {
-    return this.http.get<UserUpdate>(this.baseUrl + 'getUser').pipe(take(1));
+    return this.http.get<UserUpdate>(this.baseURL + 'getUser').pipe(take(1));
   }
 
   updateUser(model: UserUpdate): Observable<void> {
-    return this.http.put<UserUpdate>(this.baseUrl + 'updateUser', model).pipe(
+    return this.http.put<UserUpdate>(this.baseURL + 'updateUser', model).pipe(
       take(1),
       map((user: UserUpdate) => {
            this.setCurrentUser(user)
@@ -40,7 +40,7 @@ export class AccountService {
   }
 
   public register(model: any): Observable<void> {
-    return this.http.post<User>(this.baseUrl + 'register', model).pipe(
+    return this.http.post<User>(this.baseURL + 'register', model).pipe(
       take(1),
       map((response: User) => {
         const user = response;
@@ -60,5 +60,15 @@ export class AccountService {
   public setCurrentUser(user: User): void {
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
+  }
+
+  postUpload(file: File): Observable<UserUpdate> {
+    const fileToUpload = file[0] as File;
+    const formData = new FormData();
+    formData.append('file', fileToUpload);
+
+    return this.http
+        .post<UserUpdate>(`${this.baseURL}upload-image`, formData)
+        .pipe(take(1));
   }
 }
